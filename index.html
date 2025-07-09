@@ -32,7 +32,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
 <script>
-    const data = [];
 
     document.getElementById("text-input").addEventListener("keydown", function (e) {
         if (e.key === "Enter") {
@@ -111,6 +110,7 @@
     });
 
     function saveQRcodes() {
+        var data = [];
         document.querySelectorAll('.qr-code-container').forEach(div => {
             data.push({
                 imgSrc: div.querySelector('img').src,
