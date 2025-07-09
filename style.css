@@ -78,7 +78,7 @@ p {
 }
 
 .qr-code-container img {
-  width: 500px
+  width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: contain;
 }
@@ -107,7 +107,7 @@ select {
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   outline: none;
   transition: border 0.2s, box-shadow 0.2s;
-  appearance: none; Removes default arrow in most browsers
+  appearance: none; /* Removes default arrow in most browsers */
   background-image: url('data:image/svg+xml;utf8,<svg fill="gray" height="12" width="12" viewBox="0 0 20 20"><path d="M5.516 7.548l4.484 4.482 4.484-4.482-1.061-1.06L10 9.91 6.577 6.487z"/></svg>');
   background-repeat: no-repeat;
   background-position: right 12px center;
