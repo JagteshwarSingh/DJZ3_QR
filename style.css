@@ -7,3 +7,7 @@ body {
     line-height: 1.6;
     text-align: center;
 }
+
+#qr-code {
+    margin-top: 20px;
+}
