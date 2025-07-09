@@ -8,7 +8,6 @@
 </head>
 <body>
     <h1>DJZ3 QR Code Generator </h1>
-    <p>How to use: .....</p>
 
     <div class="text-input">
         <label for="text-input">Enter text to encode:</label>
@@ -26,11 +25,10 @@
     </div>
 
 
-    <div id="qr-code">
-        <img id="qr-code-image" src="">
-        <h2 id="qr-code-text"></h2>
-    </div>
+    <div id="qr-code-section"></div>
 </body>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
 <script>
@@ -43,8 +41,13 @@
     $(document).ready(function() {
         $('#generate-button-text').click(function() {
             var text = $('#text-input').val();
-            $('#qr-code-text').text(text);
-            $('#qr-code-image').attr('src', 'https://api.qrserver.com/v1/create-qr-code/?data=' + encodeURIComponent(text));
+            if (text.trim() === "") {
+                alert("Please enter some text to generate a QR code.");
+                return;
+            }
+            addQRCode(text);
+            // $('#qr-code-text').text(text);
+            // $('#qr-code-image').attr('src', 'https://api.qrserver.com/v1/create-qr-code/?data=' + encodeURIComponent(text));
         });
     });
 
@@ -98,11 +101,31 @@
             } else {
                 text = aisle + "-" + lane + "." + shelf;
             }
-            $('#qr-code-text').text(text);
-            $('#qr-code-image').attr('src', 'https://api.qrserver.com/v1/create-qr-code/?data=' + encodeURIComponent(text));
+            addQRCode(text);
+
+            // $('#qr-code-text').text(text);
+            // $('#qr-code-image').attr('src', 'https://api.qrserver.com/v1/create-qr-code/?data=' + encodeURIComponent(text));
         });
     });
 
+    function addQRCode(text) {
+        const qr_container = document.createElement("div");
+        qr_container.className = "qr-code-container";
+        const qr_image = document.createElement("img");
+        qr_image.id = "qr-code-image";
+        qr_image.src = "https://api.qrserver.com/v1/create-qr-code/?data=" + encodeURIComponent(text);
+        qr_container.appendChild(qr_image);
+        const qr_text = document.createElement("h2");
+        qr_text.id = "qr-code-text";
+        qr_text.textContent = text;
+
+        qr_container.appendChild(qr_text);
+        const qrdiv = document.getElementById("qr-code-section");
+        qrdiv.insertBefore(qr_container, qrdiv.firstChild);
+        if (qrdiv.children.length > 50) {
+            qrdiv.removeChild(qrdiv.lastChild);
+        }
+    }
 
 
 </script>
