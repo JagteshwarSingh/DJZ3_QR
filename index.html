@@ -32,6 +32,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
     let fileData = [];
 
@@ -170,15 +171,22 @@
         qr_text.id = "qr-code-text";
         qr_text.textContent = text;
 
-        const qr_image = document.createElement("img");
+        const qr_image = document.createElement("div");
         qr_image.id = "qr-code-image";
-        const searchValue = text.value.trim().toUpperCase();
+        const searchValue = text.trim().toUpperCase();
         const result = fileData.find(row => row['Resource Label']?.toUpperCase() === searchValue);
         if (result) {
             text = result['Resource Id'];
             console.log("Found Resource Id: " + text);
         }
-        qr_image.src = "https://api.qrserver.com/v1/create-qr-code/?data=" + encodeURIComponent(text) + "&ecc=L&size=300x300";
+
+        new QRCode(qr_image, {
+                    text: text,
+                    width: 200,
+                    height: 200
+                });
+
+        //qr_image.src = "https://api.qrserver.com/v1/create-qr-code/?data=" + encodeURIComponent(text) + "&ecc=L&size=300x300";
         qr_container.appendChild(qr_image);
 
         qr_container.appendChild(qr_text);
