@@ -151,6 +151,7 @@
         if (qrdiv.children.length > 20) {
             qrdiv.removeChild(qrdiv.lastChild);
         }
+        qrdiv.scrollIntoView({ behavior: 'smooth' });
         saveQRcodes();
     }
 
