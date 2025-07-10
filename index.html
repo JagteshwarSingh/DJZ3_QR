@@ -11,12 +11,12 @@
     <h1>DJZ3 QR Code Generator </h1>
 
     <div class="text-input">
-        <label for="text-input">Enter text for QR:</label>
-        <input type="text" id="text-input" placeholder="Enter the QR code text here...">
+        <label for="text-input">Enter Text For QR:</label>
+        <input type="text" id="text-input" placeholder="Enter The QR Code Text Here...">
         <button id="generate-button-text">Generate QR Code</button>
     </div>
 
-    <p>Or use the drop-down menu to select the stow location:</p>
+    <p>Or Select The Stow Location:</p>
 
     <div class="dropdown">
         <select id="select-aisle"></select>
@@ -152,10 +152,13 @@
         if (qrdiv.children.length > 20) {
             qrdiv.removeChild(qrdiv.lastChild);
         }
-        var style = window.getComputedStyle(qrdiv);
-        if (style.display !== 'none') {
-            qrdiv.scrollIntoView({ behavior: 'smooth' });
+
+        const rect = qr_container.getBoundingClientRect();
+
+        if (rect.top < 0 || rect.bottom > (window.innerHeight || document.documentElement.clientHeight)) {
+            qr_container.scrollIntoView({ behavior: 'smooth' });
         }
+
         saveQRcodes();
     }
 
