@@ -36,7 +36,7 @@
     let fileData = [];
 
     async function loadCSV() {
-        const file = await getLocalFile();
+        const file = await fetch("https://raw.githubusercontent.com/JagteshwarSingh/DJZ3_QR/main/DJ23Resource_Management.csv");
         const csvText = await file.text();
         fileData = parseCSV(csvText);
     }
